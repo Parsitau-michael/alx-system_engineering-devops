@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#This Shebang makes my bash portable in that I do not need to 
+#+ use absolute paths.
+i=0
+while [ $i -lt 10 ];
+do
+	if [ $i -eq 9 ]
+	then
+		echo "Hi"
+	fi
+	echo "Best School"
+	((i++))
+done
