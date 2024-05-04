@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+#This script displays only bash processes in an easier way
+pgrep -l bash
