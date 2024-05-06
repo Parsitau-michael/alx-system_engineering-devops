@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#This Shebang makes my bash portable in that I do not need to 
+#+ use absolute paths.
+i=0
+while [ $i -lt 20 ];
+do
+	((i++))
+	case $i in
+		4) echo "bad luck from China";;
+		9) echo "bad luck from Japan";;
+		17) echo "bad luck from Italy";;
+		*) echo "$i"
+	esac
+done
