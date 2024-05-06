@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#This script kills 4-to_infinity_and_beyond
+pid=$(pidof -aux "4-to_infinity_and_beyond")
+echo "$pid"
+kill "$pid"
