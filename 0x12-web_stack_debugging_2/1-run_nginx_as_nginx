@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# a Bash script that configures the container to run as as nginx user and listening on all active IPs on port 8080.
+
+# Ensure Nginx is stopped before making changes
+service nginx stop
+
+# Modify Nginx configuration to run as nginx user
+sed -i 's/^user\s*www-data;/user nginx;/' /etc/nginx/nginx.conf
+
+# Modify Nginx default site configuration to listen on all IPs and port 8080
+cat >/etc/nginx/sites-available/default <<EOL
+server {
+    listen 8080 default_server;
+    listen [::]:8080 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+}
+EOL
+
+# Ensure the directory structure exists for Nginx
+mkdir -p /var/www/html
+chown -R nginx:nginx /var/www/html
+
+# Start Nginx service
+service nginx start
+
+# Verify Nginx status
+service nginx status
