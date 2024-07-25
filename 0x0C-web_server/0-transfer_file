@@ -6,9 +6,9 @@ if [ "$#" -ne 4 ]; then
 	exit 1
 fi
 
-PATH="$1"
+FILE_PATH="$1"
 SERVER_IP="$2"
 USERNAME="$3"
 SSH_KEY_PATH="$4"
 
-scp -i "$SSH_KEY_PATH" -O StrictHostKeyChecking=no "$PATH" "$USERNAME@$SERVER_IP:~/"
+scp -i "$SSH_KEY_PATH" -o StrictHostKeyChecking=no "$PATH" "$USERNAME@$SERVER_IP:~/"
