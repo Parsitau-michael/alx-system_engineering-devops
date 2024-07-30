@@ -28,20 +28,19 @@ def main():
     done_tasks = [todo for todo in todos if todo['completed']]
     total_done = len(done_tasks)
 
-    # Fetch name
+    # Fetch username
     usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(emp_id)
     user_resp = requests.get(usr_url)
     user = user_resp.json()
-    name = user['name']
+    username = user['username']
 
     # Exporting the data into CSV format
     filename = "{}.csv".format(emp_id)
-
     with open(filename, mode='w', newline='') as f:
         writer = csv.writer(f)
-
         for todo in todos:
-            writer.writerow([emp_id, name, todo['completed'], todo['title']])
+            writer.writerow([str(emp_id), str(username),
+                            str(todo['completed']), str(todo['title'])])
 
 
 if __name__ == '__main__':
