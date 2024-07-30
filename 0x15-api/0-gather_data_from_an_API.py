@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""This a python script that uses REST API
+"""This module represents a python script that uses REST API
 """
 
 
