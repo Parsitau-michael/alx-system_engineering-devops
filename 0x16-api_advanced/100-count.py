@@ -8,12 +8,10 @@ and prints a sorted count of given keywords.
 import requests
 
 
-def count_words(subreddit, word_list, after=None, word_count = {}):
-    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
-    headers = {
-        'User-Agent': 'SubCountApp:v1.0'
-    }
+def count_words(subreddit, word_list, after=None, word_count={}):
 
+    url = f"https://www.reddit.com/r/{subreddit}/hot.json"
+    headers = {'User-Agent': 'SubCountApp:v1.0'}
     params = {'limit': 100}
     if after:
         params['after'] = after
@@ -26,8 +24,8 @@ def count_words(subreddit, word_list, after=None, word_count = {}):
         posts = data['data']['children']
 
         if not word_count:
-            word_count  = {word.lower(): 0 for word in word_list}
-            
+            word_count = {word.lower(): 0 for word in word_list}
+
         for post in posts:
             title = post['data']['title'].lower().split()
             for word in word_list:
@@ -38,7 +36,8 @@ def count_words(subreddit, word_list, after=None, word_count = {}):
         if after:
             return count_words(subreddit, word_list, after, word_count)
         else:
-            sorted_word_count = dict(sorted(word_count.items(), key=lambda x: (-x[1], x[0])))
+            sorted_word_count = dict(sorted(word_count.items(),
+                                     key=lambda x: (-x[1], x[0])))
             for word, count in sorted_word_count.items():
                 if count > 0:
                     print("{}: {}".format(word, count))
